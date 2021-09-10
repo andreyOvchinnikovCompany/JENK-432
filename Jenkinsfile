@@ -1,13 +1,42 @@
 pipeline {
 
-    agent any
+    triggers {
+        githubPush()
+        pollSCM('') //Empty quotes tells it to build on a push
+    }
+
+    agent {
+        label 'master'
+    }
+
+    environment {
+        EMAIL_TO = 'mohammed.siddique@fmc-na.com'
+        M2_HOME = '3.5.4'
+        JENKINS_VERSION = '2.121.3'
+    }
+
+    parameters {
+        string(
+                name: 'env',
+                defaultValue: '',
+                description: 'Sample Env variable'
+        )
+        string(
+                name: 'branch',
+                defaultValue: '',
+                description: 'Please Provide branch You would like to build from'
+        )
+    }
+  
     stages {
 
         stage('Checkout Codebase'){
-            steps{
-                cleanWs()
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/main']],userRemoteConfigs:
-                [[credentialsId: 'github-ssh-key', url: 'http://bitbucket:7990/scm/test/testrepo.git/']]]
+            steps {
+                step([$class: 'WsCleanup'])
+                catchError {
+                    echo 'Cloning..'
+                    git branch: ${branch} , credentialsId: 'adminini', url: 'http://bitbucket:7990/scm/test/testrepo.git'
+                }
             }
         }
 
