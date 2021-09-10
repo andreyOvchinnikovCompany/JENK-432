@@ -23,7 +23,7 @@ pipeline {
         )
         string(
                 name: 'branch',
-                defaultValue: '',
+                defaultValue: 'master',
                 description: 'Please Provide branch You would like to build from'
         )
     }
