@@ -23,7 +23,7 @@ pipeline {
         )
         string(
                 name: 'branch',
-                defaultValue: 'master',
+                defaultValue: '',
                 description: 'Please Provide branch You would like to build from'
         )
     }
@@ -35,7 +35,7 @@ pipeline {
                 step([$class: 'WsCleanup'])
                 catchError {
                     echo 'Cloning..'
-                    git branch: ${branch} , credentialsId: 'adminini', url: 'http://bitbucket:7990/scm/test/testrepo.git'
+                  	git branch: "${branch}" , credentialsId: 'adminini', url: 'http://bitbucket:7990/scm/test/testrepo.git'
                 }
             }
         }
