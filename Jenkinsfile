@@ -1,8 +1,7 @@
 pipeline {
-
     triggers {
         githubPush()
-        pollSCM('') //Empty quotes tells it to build on a push
+        pollSCM('0 0 1 1 0') //Empty quotes tells it to build on a push
     }
 
     agent {
@@ -10,7 +9,6 @@ pipeline {
     }
 
     environment {
-        EMAIL_TO = 'mohammed.siddique@fmc-na.com'
         M2_HOME = '3.5.4'
         JENKINS_VERSION = '2.121.3'
     }
@@ -27,15 +25,51 @@ pipeline {
                 description: 'Please Provide branch You would like to build from'
         )
     }
-  
-    stages {
 
-        stage('Checkout Codebase'){
+    tools {
+        maven 'maven'
+        jdk 'jdk8'
+    }
+
+    stages {
+        stage('Initialize') {
+            steps {
+                catchError {
+                    sh '''
+                        echo "PATH=${PATH}"
+                        echo "M2_HOME = ${M2_HOME}"
+                    '''
+                }
+            }
+
+            post {
+                success {
+                    echo 'Initialized Stage Successful . . .'
+                }
+                failure {
+                    echo 'Initialize stage failed'
+                    error('Stopping early…')
+
+                }
+            }
+        }
+
+        stage('Checkout SCM') {
             steps {
                 step([$class: 'WsCleanup'])
                 catchError {
                     echo 'Cloning..'
-                  	git branch: "${branch}" , credentialsId: 'adminini', url: 'http://bitbucket:7990/scm/test/testrepo.git'
+                    git branch: "${branch}" , credentialsId: 'adminini', url: 'http://bitbucket:7990/scm/test/testrepo.git'
+                }
+            }
+
+            post {
+                success {
+                    echo 'Checkout SCM Stage Successful . . .'
+                }
+                failure {
+                    echo 'Checkout SCM stage failed'
+                    error('Stopping early…')
                 }
             }
         }
@@ -57,9 +91,8 @@ pipeline {
 
         stage('Deploy'){
             steps{
-                sh 'cd src/ ; java App' 
+                sh 'cd src/ ; java App'
             }
         }
     }
-
 }
