@@ -19,7 +19,7 @@ pipeline {
                 description: 'Sample Env variable'
         )
         string(
-                name: 'branches',
+                name: 'branch',
                 defaultValue: '',
                 description: 'Please Provide branch You would like to build from'
         )
@@ -53,7 +53,7 @@ pipeline {
                 step([$class: 'WsCleanup'])
                 catchError {
                     echo 'Cloning..'
-                    git branch: "${branches}" , credentialsId: 'github-ssh-key', url: 'http://bitbucket:7990/scm/test/testrepo.git'
+                    git branch: "${branch}" , credentialsId: 'github-ssh-key', url: 'http://bitbucket:7990/scm/test/testrepo.git'
                 }
             }
 
