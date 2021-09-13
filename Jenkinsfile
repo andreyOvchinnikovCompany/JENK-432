@@ -1,7 +1,6 @@
 pipeline {
     triggers {
-        githubPush()
-        pollSCM('* * * * *') //Empty quotes tells it to build on a push
+        pollSCM('') //Empty quotes tells it to build on a push
     }
 
     agent {
