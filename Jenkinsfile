@@ -1,6 +1,5 @@
 pipeline {
     triggers {
-        githubPush()
         pollSCM('') //Empty quotes tells it to build on a push
     }
 
