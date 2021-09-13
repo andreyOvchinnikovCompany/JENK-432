@@ -1,7 +1,13 @@
+<<<<<<< HEAD
+#daadsfdaaaasdfaaaasdgasdgaaasfasfasfaaaaaaaaaaa# Getting Started
+=======
 #aaa# Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+>>>>>>> 643983c53c78bfc1064e3860c3587aab5850b428
 
+Waaaelcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+aaaa
 ## Folder Structure
 
 The workspace contains two folders by default, where:
