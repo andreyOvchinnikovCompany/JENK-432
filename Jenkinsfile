@@ -18,11 +18,6 @@ pipeline {
                 defaultValue: '',
                 description: 'Sample Env variable'
         )
-        string(
-                name: 'branch',
-                defaultValue: '',
-                description: 'Please Provide branch You would like to build from'
-        )
     }
 
     stages {
