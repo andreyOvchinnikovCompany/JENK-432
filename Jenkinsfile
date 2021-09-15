@@ -54,7 +54,7 @@ pipeline {
                 step([$class: 'WsCleanup'])
                 catchError {
                     echo 'Cloning..'
-                    git branch: "${branch}" , credentialsId: 'github-ssh-key', url: 'http://bitbucket:7990/scm/test2/tetete.git'
+                    git branch: "${branch}" , credentialsId: 'github-ssh-key', url: 'http://localhost:7990/bitbucket/scm/test/testrepo.git'
                 }
             }
 
