@@ -10,7 +10,7 @@ pipeline {
 
     environment {
         M2_HOME = '3.5.4'
-        JENKINS_VERSION = '2.121.3'
+        JENKINS_VERSION = '2.190.2'
     }
 
     parameters {
@@ -54,7 +54,7 @@ pipeline {
                 step([$class: 'WsCleanup'])
                 catchError {
                     echo 'Cloning..'
-                    git branch: "${branch}" , credentialsId: 'github-ssh-key', url: 'http://localhost:7990/bitbucket/scm/aaaa/testrepo.git'
+                    git branch: "${branch}" , credentialsId: 'github-ssh-key', url: 'http://localhost:7990/scm/test/testrepo.git'
                 }
             }
 
