@@ -20,7 +20,7 @@ pipeline {
                 description: 'Sample Env variable'
         )
         string(
-                name: 'branch',
+                name: 'SOURCE_BRANCH',
                 defaultValue: '',
                 description: 'Please Provide branch You would like to build from'
         )
